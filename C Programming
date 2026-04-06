@@ -1,1 +1,24 @@
+#include <stdio.h>
+
+int main() {
+    int a, b, sum;
+    
+    printf("Enter two integers: ");
+    // scanf() reads the input from the keyboard
+    scanf("%d %d", &a, &b);
+    
+    sum = a + b;
+    printf("Sum: %d\n", sum);
+    
+    return 0;
+}
+
+
+#include <stdio.h>
+
+int main() {
+    // printf() displays the string inside quotations
+    printf("Hello, World!\n");
+    return 0;
+}
 
