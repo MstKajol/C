@@ -17,7 +17,7 @@ int main() {
 #include <stdio.h>
 
 int main() {
-    // printf() displays the string inside quotations
+    / printf() displays the string inside quotations
     printf("Hello, World!\n");
     return 0;
 }
