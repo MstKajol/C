@@ -1,1 +1,48 @@
+require 'nokogiri'
+require 'open-uri'
 
+# Target URL
+url = "https://ycombinator.com" 
+html = URI.open(url)
+doc = Nokogiri::HTML(html)
+
+# Extract and print titles of top stories
+puts "--- Today's Top Headlines ---"
+doc.css('.titleline > a').each_with_index do |link, index|
+  puts "#{index + 1}. #{link.content}"
+end
+
+class TodoList
+  def initialize
+    @tasks = []
+  end
+
+  def add(task)
+    @tasks << task
+    puts "Added: #{task}"
+  end
+
+  def show
+    puts "\nYour Tasks:"
+    @tasks.each_with_index { |t, i| puts "#{i + 1}. #{t}" }
+  end
+end
+
+list = TodoList.new
+
+loop do
+  puts "\n[1] Add Task [2] View Tasks [3] Exit"
+  choice = gets.chomp.to_i
+
+  case choice
+  when 1
+    print "Enter task: "
+    list.add(gets.chomp)
+  when 2
+    list.show
+  when 3
+    break
+  else
+    puts "Invalid option!"
+  end
+end
