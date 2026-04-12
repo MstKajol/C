@@ -18,3 +18,19 @@ int main() {
 
     return 0;
 }
+
+#include <stdio.h>
+
+int main() {
+    int first, second, sum;
+    
+    printf("Enter two integers: ");
+    // scanf reads user input from the keyboard
+    scanf("%d %d", &first, &second);
+    
+    sum = first + second;
+    
+    printf("The sum of %d and %d is %d\n", first, second, sum);
+    
+    return 0;
+}
