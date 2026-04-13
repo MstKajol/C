@@ -1,0 +1,52 @@
+// Package declaration (standard for organizing Java classes)
+package com.example.demo;
+
+// Importing necessary Spring Boot web annotations
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * @RestController tells Spring that this class will handle web requests 
+ * and return data (like JSON) directly to the browser.
+ */
+@RestController
+public class WebDemoController {
+
+    /**
+     * @GetMapping("/") maps this method to the home URL (http://localhost:8080/).
+     * When you visit this in a browser, it returns the string below.
+     */
+    @GetMapping("/")
+    public String homePage() {
+        return "Welcome to my Java Web Application!";
+    }
+
+    /**
+     * @GetMapping("/greet") handles requests at http://localhost:8080/greet.
+     * It uses a @RequestParam to take a name from the URL (e.g., /greet?name=John).
+     * If no name is provided, it defaults to "World".
+     */
+    @GetMapping("/greet")
+    public String greetUser(@RequestParam(value = "name", defaultValue = "World") String name) {
+        // Returns a simple formatted string
+        return String.format("Hello, %s! Thanks for visiting.", name);
+    }
+
+    /**
+     * This method returns a Map, which Spring automatically converts 
+     * to a JSON object for the browser.
+     * URL: http://localhost:8080/status
+     */
+    @GetMapping("/status")
+    public Map<String, String> getAppStatus() {
+        Map<String, String> status = new HashMap<>();
+        status.put("app_name", "Java Web Demo");
+        status.put("status", "Running");
+        status.put("version", "1.0.0");
+        return status;
+    }
+}
+
