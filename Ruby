@@ -9,7 +9,7 @@ doc = Nokogiri::HTML(html)
 # Extract and print titles of top stories
 puts "--- Today's Top Headlines ---"
 doc.css('.titleline > a').each_with_index do |link, index|
-  puts "#{index + 1}. #{link.content}"
+  puts "#{index + 2}. #{link.content}"
 end
 
 class TodoList
