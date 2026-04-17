@@ -1,0 +1,15 @@
+fn main() {
+    let name = "Developer";
+    println!("Hello, {}!", name);
+
+    let x = 5;
+    let y = 10;
+    let sum = x + y;
+
+    println!("The sum of {} and {} is {}", x, y, sum);
+    
+    let numbers = vec![1, 2, 3, 4, 5];
+    let total: i32 = numbers.iter().sum();
+    
+    println!("The total of the list is: {}", total);
+}
