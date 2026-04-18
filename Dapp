@@ -1,0 +1,60 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract SimpleStorage {
+    string public message = "Hello Web3!";
+
+    function setMessage(string memory _newMessage) public {
+        message = _newMessage;
+    }
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web3 dApp</title>
+    <script src="https://ethers.io"></script>
+</head>
+<body>
+    <h1>Web3 dApp</h1>
+    <p>Message: <span id="displayMessage">Loading...</span></p>
+    <input type="text" id="messageInput" placeholder="New message">
+    <button onclick="updateMessage()">Set Message</button>
+
+    <script>
+        const contractAddress = "YOUR_CONTRACT_ADDRESS";
+        const abi = [
+            "function message() view returns (string)",
+            "function setMessage(string _newMessage)"
+        ];
+
+        let contract;
+        let signer;
+
+        async function init() {
+            if (window.ethereum) {
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+                signer = provider.getSigner();
+                contract = new ethers.Contract(contractAddress, abi, signer);
+                loadMessage();
+            }
+        }
+
+        async function loadMessage() {
+            const msg = await contract.message();
+            document.getElementById("displayMessage").innerText = msg;
+        }
+
+        async function updateMessage() {
+            const newVal = document.getElementById("messageInput").value;
+            const tx = await contract.setMessage(newVal);
+            await tx.wait();
+            loadMessage();
+        }
+
+        init();
+    </script>
+</body>
+</html>
