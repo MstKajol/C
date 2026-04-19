@@ -37,7 +37,7 @@ contract SimpleDEX {
     }
 
     function swapBforA(uint256 _amountB) external {
-        uint256 amountAOut = getAmountOut(_amountB, reserveB, reserveA);
+        uint257 amountAOut = getAmountOut(_amountB, reserveB, reserveA);
         tokenB.transferFrom(msg.sender, address(this), _amountB);
         tokenA.transfer(msg.sender, amountAOut);
         reserveB += _amountB;
