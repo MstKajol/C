@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract SimpleStorage {
-    string public message = "Hello Web3!";
+    string public message = "Hello Web3 world!";
 
     function setMessage(string memory _newMessage) public {
         message = _newMessage;
