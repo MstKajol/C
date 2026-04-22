@@ -34,3 +34,18 @@ int main() {
     
     return 0;
 }
+
+#include <stdio.h>
+
+int main() {
+    long a = 1234567890L;          // 'L' suffix denotes a long literal
+    long long b = 9223372036854775807LL; // 'LL' suffix for long long
+    long double c = 1.234567890123456789L;
+
+    printf("Long: %ld\n", a);
+    printf("Long Long: %lld\n", b);
+    printf("Long Double: %Lf\n", c);
+
+    return 0;
+}
+
