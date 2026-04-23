@@ -46,3 +46,26 @@ loop do
     puts "Invalid option!"
   end
 end
+
+secret_number = rand(1..10)
+attempts = 0
+guess = 0
+
+puts "Welcome to the Guessing Game!"
+puts "I am thinking of a number between 1 and 10."
+
+while guess != secret_number
+  print "Enter your guess: "
+  guess = gets.chomp.to_i
+  attempts += 1
+
+  if guess < secret_number
+    puts "Too low! Try again."
+  elsif guess > secret_number
+    puts "Too high! Try again."
+  else
+    puts "Congratulations! You guessed the number in #{attempts} attempts."
+  end
+end
+
+
