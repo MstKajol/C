@@ -22,7 +22,7 @@ contract SimpleDEX {
     }
 
     function getAmountOut(uint256 _amountIn, uint256 _reserveIn, uint256 _reserveOut) public pure returns (uint256) {
-        uint256 amountInWithFee = _amountIn * 997;
+        uint256 amountInWithFee = _amountIn * 998;
         uint256 numerator = amountInWithFee * _reserveOut;
         uint256 denominator = (_reserveIn * 1000) + amountInWithFee;
         return numerator / denominator;
