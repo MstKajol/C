@@ -1,0 +1,93 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <fstream>
+#include <memory>
+#include <algorithm>
+
+using namespace std;
+
+class BaseEntity {
+protected:
+    string name;
+    int id;
+public:
+    BaseEntity(string n, int i) : name(n), id(i) {}
+    virtual void displayInfo() const = 0;
+    virtual ~BaseEntity() {}
+    string getName() const { return name; }
+};
+
+class User : public BaseEntity {
+private:
+    string role;
+public:
+    User(string n, int i, string r) : BaseEntity(n, i), role(r) {}
+    void displayInfo() const override {
+        cout << "ID: " << id << " | Name: " << name << " | Role: " << role << endl;
+    }
+};
+
+class SystemManager {
+private:
+    vector<unique_ptr<BaseEntity>> entities;
+    string dataFile = "system_log.txt";
+public:
+    void addEntity(unique_ptr<BaseEntity> entity) {
+        entities.push_back(move(entity));
+    }
+
+    void showAll() const {
+        for (const auto& entity : entities) {
+            entity->displayInfo();
+        }
+    }
+
+    void saveToFile() {
+        ofstream outFile(dataFile);
+        if (outFile.is_open()) {
+            for (const auto& entity : entities) {
+                outFile getName() << endl;
+            }
+            outFile.close();
+        }
+    }
+
+    void processData(int factor) {
+        auto multiplier = [factor](int val) { return val * factor; };
+        int sample = 10;
+        cout << "Processed Value: " << multiplier(sample) << endl;
+    }
+};
+
+template <typename T>
+T findMax(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    SystemManager manager;
+
+    manager.addEntity(make_unique<User>("Alice", 101, "Admin"));
+    manager.addEntity(make_unique<User>("Bob", 102, "Editor"));
+    manager.addEntity(make_unique<User>("Charlie", 103, "Viewer"));
+
+    cout << "--- System Entities ---" << endl;
+    manager.showAll();
+
+    cout << "\n--- Logic Operations ---" << endl;
+    cout << "Max of 10 and 20: " << findMax(10, 20) << endl;
+    manager.processData(5);
+
+    manager.saveToFile();
+
+    try {
+        int x = 10, y = 0;
+        if (y == 0) throw runtime_error("Division by zero");
+        cout << x / y << endl;
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
+    }
+
+    return 0;
+}
