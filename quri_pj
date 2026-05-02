@@ -1,0 +1,80 @@
+=begin
+Task Management System Example
+------------------------------
+This script demonstrates Ruby's "Long Code" capabilities including:
+1. Multi-line block comments (like this one)
+2. Classes and Object-Oriented Programming (OOP)
+3. Data structures (Arrays and Hashes)
+4. Iteration and Control Flow
+=end
+
+class TaskManager
+  # Initialize the manager with an empty list of tasks
+  # Inline comments like this are best for brief explanations
+  def initialize
+    @tasks = [] # We use an instance variable to store task data
+  end
+
+  # Adds a new task to our tracker
+  # @param title [String] the name of the task
+  # @param priority [String] 'High', 'Medium', or 'Low'
+  def add_task(title, priority = "Medium")
+    # Store task as a Hash for easy access to attributes
+    task = {
+      title: title,
+      priority: priority,
+      completed: false,
+      created_at: Time.now
+    }
+    
+    @tasks << task
+    puts "✅ Added: #{title} (#{priority} Priority)"
+  end
+
+  # Filters and displays tasks based on completion status
+  def list_tasks(only_incomplete = false)
+    puts "\n--- Current Task List ---"
+    
+    # Ternary operator used for clean conditional logic
+    filtered = only_incomplete ? @tasks.reject { |t| t[:completed] } : @tasks
+
+    if filtered.empty?
+      puts "No tasks found!"
+    else
+      filtered.each_with_index do |task, index|
+        status = task[:completed] ? "[DONE]" : "[    ]"
+        puts "#{index + 1}. #{status} #{task[:title]} - Priority: #{task[:priority]}"
+      end
+    end
+    puts "------------------------\n"
+  end
+
+  # Marks a task as finished based on its index
+  def complete_task(index)
+    if @tasks[index]
+      @tasks[index][:completed] = true
+      puts "⭐ Task '#{@tasks[index][:title]}' marked as complete!"
+    else
+      puts "❌ Error: Task at index #{index} doesn't exist."
+    end
+  end
+end
+
+# --- Execution Block ---
+# This is where we actually run our program logic
+
+my_list = TaskManager.new
+
+# Add some sample data
+my_list.add_task("Buy groceries", "High")
+my_list.add_task("Fix Ruby bug", "Medium")
+my_list.add_task("Call mom", "Low")
+
+# Mark the first item as done
+my_list.complete_task(0)
+
+# Show all tasks
+my_list.list_tasks
+
+# Final note: The =begin and =end keywords MUST be at the 
+# very start of the line with no spaces before them.
