@@ -1,0 +1,13 @@
+using System;
+
+namespace HelloWorldApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "Hello, C# code!";
+            Console.WriteLine(message);
+        }
+    }
+}
