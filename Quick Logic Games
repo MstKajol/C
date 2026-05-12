@@ -1,0 +1,28 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        string[] options = { "Rock", "Paper", "Scissors" };
+        Random rng = new Random();
+
+        while (true)
+        {
+            Console.Write("Enter Rock, Paper, or Scissors (or 'quit'): ");
+            string input = Console.ReadLine();
+            if (input.ToLower() == "quit") break;
+
+            string cpu = options[rng.Next(0, 3)];
+            Console.WriteLine($"CPU chose: {cpu}");
+
+            if (input.ToLower() == cpu.ToLower()) Console.WriteLine("Tie!");
+            else if ((input.ToLower() == "rock" && cpu == "Scissors") ||
+                     (input.ToLower() == "paper" && cpu == "Rock") ||
+                     (input.ToLower() == "scissors" && cpu == "Paper"))
+                Console.WriteLine("You Win!");
+            else Console.WriteLine("You Lose!");
+        }
+    }
+}
+```
